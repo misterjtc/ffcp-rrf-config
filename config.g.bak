@@ -6,7 +6,7 @@
 ; General preferences
 G90                                                ; send absolute coordinates...
 M83                                                ; ...but relative extruder moves
-M550 P"prometheus"                                     ; set printer name
+M550 P"prometheus"                                 ; set printer name
 
 ; Drives
 M569 P0.0 S1 D3 H50 v50                            ; physical drive 0.0 goes forwards
@@ -22,14 +22,15 @@ M915 P0.4 T50
 M584 X0.0 Y0.1 Z0.2 E0.3:0.4                       ; set drive mapping
 M350 X16 Y16 Z16 E16:16 I1                         ; configure microstepping with interpolation
 M92 X94.117647 Y94.117647 Z400.00 E99.06:99.06     ; set steps per mm
-M566 X480.00 Y480.00 Z400 E1200:1200         ; set maximum instantaneous speed changes (mm/min)
-M203 X12000 Y12000 Z2000 E3000:3000    ; set maximum speeds (mm/min)
-M201 X500.00 Y500.00 Z150.00 E2000:2000        ; set accelerations (mm/s^2)
+M566 X480.00 Y480.00 Z400 E1200:1200               ; set maximum instantaneous speed changes (mm/min)
+M203 X12000 Y12000 Z2000 E3000:3000                ; set maximum speeds (mm/min)
+M201 X500.00 Y500.00 Z150.00 E2000:2000            ; set accelerations (mm/s^2)
 M906 X810 Y810 Z300 E810:810 I30                   ; set motor currents (mA) and motor idle factor in per cent
 M84 S30                                            ; Set idle timeout
 
 ; Filament end sensor config
-M591 D1 P3 C"!io5.in" S1
+; M591 D1 P3 E6 C"io5.in" S1					   ; This is for the Duet3D magnetic filament sensor
+M591 D1 P1 C"io3.in" S1							   ; This is for the TriangleLabs filament out sensor
 
 ; Axis Limits
 M208 X-111 Y-75 Z0 S1                              ; set axis minima
@@ -42,19 +43,21 @@ M574 Z1 S1 P"!io2.in"                              ; configure switch-type (e.g.
 
 ; Z-Probe
 M558 P0 H5 F120 T6000                              ; disable Z probe but set dive height, probe speed and travel speed
-M557 X-70:140 Y-65:65 S30:26                           ; define mesh grid
+M557 X-70:140 Y-65:65 S30:26                       ; define mesh grid
 
 ; Heaters
-M308 S0 P"temp0" Y"thermistor" T100000 B4066         ; configure sensor 0 as thermistor on pin temp0
+M308 S0 P"temp0" Y"thermistor" T100000 B4066       ; configure sensor 0 as thermistor on pin temp0
 M950 H0 C"out0" T0                                 ; create bed heater output on out0 and map it to sensor 0
 M307 H0 R0.512 K0.276:0.000 D1.59 E1.35 S0.85 B1   ; enable bang-bang mode for the bed heater and set PWM limit
 M140 H0                                            ; map heated bed to heater 0
 M143 H0 S120                                       ; set temperature limit for heater 0 to 120C
-M308 S1 P"spi.cs1" Y"thermocouple-max31856"        ; configure sensor 1 as thermocouple via CS pin spi.cs1
+;M308 S1 P"spi.cs1" Y"thermocouple-max31856"       ; configure sensor 1 as thermocouple via CS pin spi.cs1
+M308 S1 P"temp1" Y"thermistor" T100000 B4267       ; configure sensor 1 as thermistor on pin temp1
 M950 H1 C"out1" T1                                 ; create nozzle heater output on out1 and map it to sensor 1
 M307 H1 R1.840 K0.403:0.014 D9.40 E1.35 S1.00 B0 V24.1 ; disable bang-bang mode for heater  and set PWM limit
 M143 H1 S280                                       ; set temperature limit for heater 1 to 280C
-M308 S2 P"spi.cs2" Y"thermocouple-max31856"        ; configure sensor 2 as thermocouple via CS pin spi.cs2
+;M308 S2 P"spi.cs2" Y"thermocouple-max31856"       ; configure sensor 2 as thermocouple via CS pin spi.cs2
+M308 S2 P"temp2" Y"thermistor" T100000 B4267       ; configure sensor 1 as thermistor on pin temp1
 M950 H2 C"out2" T2                                 ; create nozzle heater output on out2 and map it to sensor 2
 M307 H2 R1.701 K0.336:0.119 D11.37 E1.35 S1.00 B0 V24.1 ; disable bang-bang mode for heater  and set PWM limit
 M143 H2 S280                                       ; set temperature limit for heater 2 to 280C

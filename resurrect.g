@@ -1,10 +1,10 @@
-; File "0:/gcodes/FlashForgeCreatorPro-LCDReplacmentPanelMount-Ver1.gcode" resume print after print paused at 2023-01-22 21:08
+; File "0:/gcodes/Interlocking_Module_0.2_x2.gcode" resume print after print paused at 2023-12-10 00:20
 G21
 M140 P0 S60.0
-G92 X46.305 Y33.347 Z0.400
+G92 X-77.362 Y-37.929 Z59.200
 G60 S1
 G10 P0 S0 R0
-G10 P1 S210 R210
+G10 P1 S210 R0
 T1 P0
 M98 P"resurrect-prologue.g"
 M116
@@ -22,8 +22,8 @@ G10 L2 P7 X0.00 Y0.00 Z0.00
 G10 L2 P8 X0.00 Y0.00 Z0.00
 G10 L2 P9 X0.00 Y0.00 Z0.00
 G54
-M106 S0.00
-M106 P0 S0.00
+M106 S1.00
+M106 P0 S1.00
 M116
 G92 E0.00000
 M83
@@ -31,11 +31,11 @@ M486 S0 A"PLA Left"
 M486 S1 A"PLA LEFT"
 M486 S1
 G17
-M23 "0:/gcodes/FlashForgeCreatorPro-LCDReplacmentPanelMount-Ver1.gcode"
-M26 S7714
-G0 F6000 Z2.400
-G0 F6000 X80.350 Y33.050
-G0 F6000 Z0.400
-G1 F540.0 P0
+M23 "0:/gcodes/Interlocking_Module_0.2_x2.gcode"
+M26 S19591862
+G0 F6000 Z61.200
+G0 F6000 X-43.317 Y-38.226
+G0 F6000 Z59.200
+G1 F3600.0 P0
 G21
 M24

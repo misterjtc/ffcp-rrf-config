@@ -8,4 +8,6 @@ G91            ; relative positioning
 G1 Z5 F360     ; lift Z by 5mm
 G90            ; absolute positioning
 G1 X0 Y0 F6000 ; go to X=0 Y=0
-
+M568 P0 A1	   ; set tool 0 to standby
+M568 P1 A1	   ; set tool 1 to standby
+M144           ; set bed heater to standby
